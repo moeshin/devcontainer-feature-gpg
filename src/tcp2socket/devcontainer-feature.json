@@ -1,6 +1,6 @@
 {
-  "id": "gpg-tcp2socket",
-  "name": "gpg-tcp2socket",
+  "id": "tcp2socket",
+  "name": "tcp2socket",
   "version": "0.0.1",
   "options": {
     "defaultHost": {
