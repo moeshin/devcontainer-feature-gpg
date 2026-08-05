@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -e
+
+socket_name="$1"
+
+if [ -z "$socket_name" ]; then
+  gpg-tcp2socket
+  exit $?
+fi
+
+nohup sh -c 'gpg-tcp2socket "$@"'" >'/tmp/feature-gpg-tcp2socket-$socket_name.log' 2>&1 &" -- "$@"

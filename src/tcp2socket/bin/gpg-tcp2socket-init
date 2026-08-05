@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+
+gpg_conf_dir="$(gpgconf --list-dirs homedir)" || exit $?
+
+if ! [ -e "$gpg_conf_dir" ]; then
+  # shellcheck disable=SC2174
+  mkdir -p -m 700 "$gpg_conf_dir"
+  echo "init: mkdir -p -m 700 '$gpg_conf_dir'"
+fi
+
+echo use-keyboxd >> "$gpg_conf_dir/common.conf"

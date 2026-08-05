@@ -1,0 +1,10 @@
+{
+  "test": {
+    "dockerFile": "Dockerfile",
+    "image": "mcr.microsoft.com/devcontainers/base",
+    "features": {
+      "tcp2socket": {
+      }
+    }
+  }
+}

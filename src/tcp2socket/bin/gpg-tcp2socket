@@ -1,0 +1,26 @@
+#!/bin/sh
+
+set -e
+
+: "${GPG_TCP2SOCKET_DEFAULT_HOST:=host.docker.internal}"
+socket_name="$1"
+tcp_addr="$2"
+
+if [ $# -ne 2 ]; then
+  echo "Usage: gpg-tcp2socket <socket_name> <tcp_addr>"
+fi
+
+case "$tcp_addr" in
+:*)
+  tcp_addr="$GPG_TCP2SOCKET_DEFAULT_HOST$tcp_addr"
+  ;;
+esac
+
+socket_file="$(gpgconf --list-dirs "$socket_name-socket")" || exit $?
+if [ -z "$socket_file" ]; then
+  echo "gpg-tcp2socket: socket_file is empty"
+  exit 1
+fi
+
+echo "gpg-tcp2socket: listen '$socket_file' -> $tcp_addr"
+socat "UNIX-LISTEN:$socket_file,fork,unlink-early" "TCP:$tcp_addr"

@@ -1,0 +1,24 @@
+{
+  "id": "gpg-tcp2socket",
+  "name": "gpg-tcp2socket",
+  "version": "0.0.1",
+  "options": {
+    "defaultHost": {
+      "type": "string",
+      "default": "host.docker.internal"
+    },
+    "agentAddr": {
+      "type": "string",
+      "default": ":59114"
+    },
+    "keyboxdAddr": {
+      "type": "string",
+      "default": ":59115"
+    }
+  },
+  "installsAfter": [
+    "ghcr.io/devcontainers/features/common-utils"
+  ],
+  "postCreateCommand": "gpg-tcp2socket-init",
+  "postStartCommand": "gpg-tcp2socket-startup"
+}
